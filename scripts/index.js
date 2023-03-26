@@ -2,6 +2,7 @@
 // inquire, fs
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -39,7 +40,7 @@ const questions = [
     type: 'list',
     name: 'license',
     message: 'Choose a license for this project:',
-    choices: ['Apache-2.0', 'Boost-1.0', 'BSD-3-Clause', 'MIT', 'Unlicense'],
+    choices: ['Apache-2.0', 'Boost-1.0', 'BSD-3--Clause', 'MIT', 'Unlicense'],
   },
   {
     type: 'input',
@@ -68,51 +69,8 @@ function writeToFile(fileName, data) {
 // TODO: Create a function to initialize app
 function init() {
   inquirer.prompt(questions).then((answers) => {
-    const { title, description, installation, usage, contributing, tests, license, githubUsername, email } = answers;
-
-    const licenseBadge = `![License](https://img.shields.io/badge/License-${license}-green.svg)`;
-
-    const data = `# ${title}
-    ${licenseBadge}
-    
-    ## Description
-
-    ${description}
-    
-    ## Table of Contents
-    
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [Contributing](#contributing)
-    - [Tests](#tests)
-    - [License](#license)
-    - [Questions](#questions)
-    
-    ## Installation
-    
-    ${installation}
-    
-    ## Usage
-    
-    ${usage}
-    
-    ## Contributing
-    
-    ${contributing}
-    
-    ## Tests
-    
-    ${tests}
-    
-    ## License
-    
-    This project is licensed under the ${license} license.
-    
-    ## Questions
-    
-    If you have any questions, please contact ${githubUsername} at ${email}.`;
-
-    writeToFile('README.md', data);
+    const data = generateMarkdown(answers);
+    writeToFile('../generated-readme/README.md', data);
   });
 }
 
