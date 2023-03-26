@@ -19,6 +19,7 @@ Install Node.js on your machine.  Clone the repository to said local machine.  N
 ## Usage
 
 The usage of this project is to generate a high-quality README file for any software project. The user will be prompted with a series of questions regarding the project, including the title, description, installation instructions, usage, contribution guidelines, testing instructions, license type, GitHub username, and email address. Once all the questions are answered, the application will generate a README file with the given answers. 
+
 The README file will include all the necessary sections of a good README, such as a project description, installation instructions, usage examples, contribution guidelines, testing instructions, license information, and contact information for the project author. This project can be especially helpful for developers who want to save time and effort in creating a good README for their projects.
 
 ## License
