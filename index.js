@@ -50,19 +50,72 @@ const questions = [
     type: 'input',
     name: 'email',
     message: 'What is your email address?'
-  }
-  
+  } 
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-  fs.writeFile(fileName, data, (err) =>
-    err ? console.error(err) : console.log('README file generated!')
-  );
+  fs.writeFile(fileName, data, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('README file generated!');
+    }
+  });
 }
 
+
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+  inquirer.prompt(questions).then((answers) => {
+    const { title, description, installation, usage, contributing, tests, license, githubUsername, email } = answers;
+
+    const licenseBadge = `![License](https://img.shields.io/badge/License-${license}-green.svg)`;
+
+    const data = `# ${title}
+    ${licenseBadge}
+    
+    ## Description
+
+    ${description}
+    
+    ## Table of Contents
+    
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Contributing](#contributing)
+    - [Tests](#tests)
+    - [License](#license)
+    - [Questions](#questions)
+    
+    ## Installation
+    
+    ${installation}
+    
+    ## Usage
+    
+    ${usage}
+    
+    ## Contributing
+    
+    ${contributing}
+    
+    ## Tests
+    
+    ${tests}
+    
+    ## License
+    
+    This project is licensed under the ${license} license.
+    
+    ## Questions
+    
+    If you have any questions, please contact ${githubUsername} at ${email}.`;
+
+    writeToFile('README.md', data);
+  });
+}
+
 
 // Function call to initialize app
 init();
